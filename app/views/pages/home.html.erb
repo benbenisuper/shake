@@ -2,32 +2,34 @@
   <div class="container">
     <h1> Welcome to shake! Book your vennue <strong>now</strong>!</h1>
     <p>The fast way to find and book a vennue in Switerzalnd.</p>
-    <form class="form-inline search-bar">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Type the location">
+    <form class="form-inline d-block bg-white d-lg-flex justify-content-lg-between search-bar">
+      <div class="form-group flex-grow-1">
+        <input type="text" class="form-control w-100" placeholder="Type the location">
       </div>
-      <div class="form-group ml-2">
-        <label for="inputState" class="mr-2">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>catergory 1</option>
-          <option>catergory 2</option>
-          <option>catergory 3</option>
-          <option>catergory 4</option>
-        </select>
-      </div>
-      <div class="form-group ml-2">
-        <label for="inputState" class="mr-2">Type of event</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>catergory 1</option>
-          <option>catergory 2</option>
-          <option>catergory 3</option>
-          <option>catergory 4</option>
-        </select>
-        <div class="form-group ml-2">
-          <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
+        <div class="form-group ml-lg-2">
+          <label for="inputState" class="mr-2">Category </label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>catergory 1</option>
+            <option>catergory 2</option>
+            <option>catergory 3</option>
+            <option>catergory 4</option>
+          </select>
         </div>
+        <div class="form-group ml-lg-2" >
+          <label for="inputState" class="mx-2">Type of event</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>catergory 1</option>
+            <option>catergory 2</option>
+            <option>catergory 3</option>
+            <option>catergory 4</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group ml-2">
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
       </div>
     </form>
   </div>
