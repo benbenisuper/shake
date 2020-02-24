@@ -16,7 +16,6 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 gem 'devise'
-gem 'cloudinary', '~> 1.12.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
