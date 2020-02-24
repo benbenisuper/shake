@@ -6,6 +6,8 @@ end
 
 def create
   @venue = Venue.new(venue_params)
+  @user = current_user
+  @venue.user = @user
 
   if @venue.save
     redirect_to venues_path
