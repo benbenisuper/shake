@@ -17,6 +17,7 @@ def create
 end
 
 def index
+  @venues = Venue.all
 end
 
 def show
