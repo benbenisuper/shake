@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+seed_user = User.create(email: "test@test.com", password: "testest")
+
+seed_venue = Venue.new(name: "Venue 1", description: "Venue 1 description", category: "House", location: "Buenos Aires")
+seed_venue.user = seed_user
+seed_venue.save
