@@ -2,26 +2,25 @@
 <h1>Index</h1>
 <br>
 <div class="container">
-<div class="card-deck">
-  <% @venues.each do |venue| %>
-
-  <div class="card">
-    <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
-      <p class="card-text"><%= venue.description %></p>
+  <div class="card-columns">
+    <% @venues.each do |venue| %>
+    <div class="card">
+      <% if venue.photo.attached? %>
+      <%= cl_image_tag venue.photo.key, class:"card-img-top"%>
+      <% else %>
+      <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+        <p class="card-text"><%= venue.description %></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><%= venue.location %><%= venue.category %></small>
+      </div>
     </div>
-    <div class="card-footer">
-      <small class="text-muted"><%= venue.location %><%= venue.category %></small>
-    </div>
+    <% end %>
   </div>
-  <% end %>
-
 </div>
-</div>
-
-
-
 
 
 
