@@ -1,14 +1,14 @@
 <div class="container">
-  <h1 class="my-5">Hello <%= current_user.first_name %></h1>
+  <h1 class="mt-5">Hello <%= current_user.first_name %></h1>
 
-  <p>Below, you can see your current listing and more important stuff</p>
-  <br>
+  <p>Below, you can see your current listing and bookings</p>
+
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">Bookings</a>
+      <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">Your Bookings</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false">listings</a>
+      <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false">Your Listings</a>
     </li>
   </ul>
 
@@ -20,26 +20,19 @@
         <h4 class="mt-4">Looks empty here. Book something!</h4>
       <% end %>
 
-      <div class="card-columns mt-4">
-        <% current_user.bookings.each do |booking|%>
-          <div class="card">
-            <% if booking.venue.photos.attached? %>
-              <%= cl_image_tag booking.venue.photos.first.key, class:"card-img-top" %>
-            <% else %>
-              <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h5>
-              <p class="card-text"><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">PRICE</small>
-            </div>
+      <% current_user.bookings.each do |booking|%>
+
+        <div class="card-dashboard mt-2">
+          <%= cl_image_tag booking.venue.venue_image, class:"card-img-top" %>
+          <div class="card-dashboard-infos">
+            <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h2>
+            <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
     </div>
+
 
     <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
 
@@ -47,24 +40,16 @@
         <h4 class="mt-4">Looks empty here. Book something!</h4>
       <% end %>
 
-      <div class="card-columns mt-4">
-        <% current_user.venues.each do |venue|%>
-          <div class="card">
-            <% if venue.photos.attached? %>
-              <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
-            <% else %>
-              <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
-              <p class="card-text"><%= venue.description %></p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted"><%= venue.location %> - <%= venue.category %></small>
-            </div>
+      <% current_user.venues.each do |venue|%>
+
+        <div class="card-dashboard mt-2">
+          <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
+          <div class="card-dashboard-infos">
+            <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
+            <p><%= venue.description %></p>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
     </div>
   </div>

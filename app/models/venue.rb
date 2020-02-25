@@ -14,4 +14,11 @@ class Venue < ApplicationRecord
   validates :capacity, presence: :true
   validates :price, presence: :true, numericality: { only_integer: true }
 
+ def venue_image
+    if self.photos.attached?
+      self.photos.first.key
+    else
+      "defaultEventImage"
+    end
+  end
 end
