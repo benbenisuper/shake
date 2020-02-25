@@ -3,6 +3,9 @@ class VenuesController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+
+
+
 def new
   @venue = Venue.new
 
@@ -18,20 +21,14 @@ def create
   @venue.user = @user
 
   if @venue.save
-    redirect_to dashboard_path
+    redirect_to venues_path
   else
     render :new
   end
 end
 
 def index
-  @location = params["location"]
-  @location = "City" if @location == "" || @location == nil
-  @category = params["Category"]
-  @activity = params["Type-of-event"]
-
-  @venues = policy_scope(Venue).order(created_at: :desc).where(["location = ? and category = ? and activity = ?", @location, @category, @activity])
-  # @venues = policy_scope(Venue).order(created_at: :desc).where(location: @location and category: @category and type: @type)
+  @venues = policy_scope(Venue).order(created_at: :desc)
 end
 
 def show
@@ -72,7 +69,7 @@ end
 private
 
 def venue_params
-  params.require(:venue).permit(:name, :location, :category, :description, :capacity, :price, :activity, photos: [])
+  params.require(:venue).permit(:name, :location, :category, :description, :capacity, photos: [])
 end
 
 end

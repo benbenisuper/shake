@@ -5,19 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
 
-morgan = User.create(email: "morgan@shake.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000")
-ben = User.create(email: "ben@shake.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000")
-jose = User.create(email: "jose@shake.com", password: "testtest", first_name: "Jose", last_name: "X", phone:"0000")
-manuel = User.create(email: "manuel@shake.com", password: "testtest", first_name: "Manuel", last_name: "X", phone:"0000")
+seed_user_a = User.create(email: "a@test.de", password: "testtest")
+seed_user_b = User.create(email: "b@test.de", password: "testtest")
 
-
-
-
-10.times do
-seed_venue = Venue.new(name: Faker::Name.name , description: Faker::Lorem.paragraphs, price: Faker::Number.number(digits: 5), activity: "Wedding", capacity: Faker::Number.number(digits: 2), category: "Private House", location: Faker::Address.full_address)
-seed_venue.user = jose
+seed_venue = Venue.new(name: "Venue 1A", description: "Venue 1 description", category: "House", location: "Buenos Aires")
+seed_venue.user = seed_user_a
 seed_venue.save
-end
 
+seed_venue = Venue.new(name: "Venue 2A", description: "Venue 2 description", category: "House", location: "Buenos Aires")
+seed_venue.user = seed_user_a
+seed_venue.save
+
+seed_venue = Venue.new(name: "Venue 3B", description: "Venue 3 description", category: "Dancehall", location: "New York")
+seed_venue.user = seed_user_b
+seed_venue.save
+
+seed_venue = Venue.new(name: "Venue 4B", description: "Venue 4 description", category: "Dancehall", location: "New York")
+seed_venue.user = seed_user_b
+seed_venue.save
