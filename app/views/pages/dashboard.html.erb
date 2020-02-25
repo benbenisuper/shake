@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="my-5">Hello <%= current_user.email %></h1>
+  <h1 class="my-5">Hello <%= current_user.first_name %></h1>
 
   <p>Below, you can see your current listing and more important stuff</p>
   <br>
@@ -11,30 +11,61 @@
       <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false">listings</a>
     </li>
   </ul>
+
   <div class="tab-content" id="myTabContent">
+
     <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
-    </div>
-    <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
-       <div class="container mt-">
-          <div class="card-columns">
-           <% current_user.venues.each do |venue|%>
-             <div class="card">
-              <% if venue.photos.attached? %>
-                <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
-              <% else %>
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
-                <p class="card-text"><%= venue.description %></p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted"><%= venue.location %><%= venue.category %></small>
-              </div>
+
+      <% if current_user.bookings == [] %>
+        <h4 class="mt-4">Looks empty here. Book something!</h4>
+      <% end %>
+
+      <div class="card-columns mt-4">
+        <% current_user.bookings.each do |booking|%>
+          <div class="card">
+            <% if booking.venue.photos.attached? %>
+              <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
+            <% else %>
+              <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h5>
+              <p class="card-text"><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
             </div>
-          <% end %>
-        </div>
+            <div class="card-footer">
+              <small class="text-muted">PRICE</small>
+            </div>
+          </div>
+        <% end %>
       </div>
+
+    </div>
+
+    <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
+
+      <% if current_user.venues == [] %>
+        <h4 class="mt-4">Looks empty here. Book something!</h4>
+      <% end %>
+
+      <div class="card-columns mt-4">
+        <% current_user.venues.each do |venue|%>
+          <div class="card">
+            <% if venue.photos.attached? %>
+              <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
+            <% else %>
+              <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+              <p class="card-text"><%= venue.description %></p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted"><%= venue.location %> - <%= venue.category %></small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>
