@@ -10,8 +10,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     authorize @booking
+    @booking.status = 1
     @user = current_user
     @booking.user = @user
+    @booking.price = @booking.venue.price * (@booking.end - @booking.start).to_i
     if @booking.save
       redirect_to edit_booking_path(@booking)
     else
@@ -32,6 +34,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     authorize @booking
+    @booking.status = 2
     if @booking.update(booking_params)
       redirect_to booking_path(@booking)
     else
