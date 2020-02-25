@@ -12,8 +12,6 @@ flatpickr("#start", {
   enableTime: true,
   dateFormat: "Y-m-d H:i",
   minDate: "today",
-
-
   altInput: true,
   plugins: [new rangePlugin({ input: "#end"})]
 
