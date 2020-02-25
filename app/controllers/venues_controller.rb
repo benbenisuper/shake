@@ -35,8 +35,8 @@ def index
 end
 
 def show
-  @booking = Booking.new
   @venue = Venue.find(params[:id])
+  @booking = @venue.bookings.build
 
   authorize @venue
 end
@@ -72,7 +72,7 @@ end
 private
 
 def venue_params
-  params.require(:venue).permit(:name, :location, :activity, :category, :description, :capacity, photos: [])
+  params.require(:venue).permit(:name, :location, :category, :description, :capacity, :price, :activity, photos: [])
 end
 
 end

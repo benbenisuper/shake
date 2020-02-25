@@ -12,5 +12,6 @@ class Venue < ApplicationRecord
   validates :location, presence: :true
   validates :description, presence: :true
   validates :capacity, presence: :true
+  validates :price, presence: :true, numericality: { only_integer: true }
 
 end
