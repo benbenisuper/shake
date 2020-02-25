@@ -10,9 +10,33 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to "Home", "/", class: "nav-link" %>
+
+      <li class="nav-item">
+        <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
+
+      <li class="nav-item">
+        <%= link_to "Venues", venues_path, class: "nav-link" %>
+      </li>
+
+
+      <% if controller_name == "venues" && action_name == "show" %>
+
+        <li class="nav-item">
+          <% if policy(@venue).edit? %>
+            <%= link_to "Edit venue", edit_venue_path, class: "nav-link" %>
+          <% end %>
+
+        </li>
+
+        <li>
+          <% if policy(@venue).destroy? %>
+            <%= link_to "Delete venue", venue_path(@venue), method: :delete, class: "nav-link" %>
+          <% end %>
+
+        </li>
+
+      <% end %>
 
       <%= render "shared/user_navbar" %>
 

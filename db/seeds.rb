@@ -6,36 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-seed_user = User.create(email: "test@test.com", password: "testest")
+seed_user_a = User.create(email: "a@test.de", password: "testtest")
+seed_user_b = User.create(email: "b@test.de", password: "testtest")
 
-seed_venue = Venue.new(name: "Venue 1", description: "Venue 1 description", category: "House", location: "Buenos Aires")
-seed_venue.user = seed_user
+seed_venue = Venue.new(name: "Venue 1A", description: "Venue 1 description", category: "House", location: "Buenos Aires")
+seed_venue.user = seed_user_a
 seed_venue.save
 
-seed_venue = Venue.new(name: "Venue 2", description: "Venue 2 description", category: "House", location: "Buenos Aires")
-seed_venue.user = seed_user
+seed_venue = Venue.new(name: "Venue 2A", description: "Venue 2 description", category: "House", location: "Buenos Aires")
+seed_venue.user = seed_user_a
 seed_venue.save
 
-seed_venue = Venue.new(name: "Venue 3", description: "Venue 3 description", category: "Dancehall", location: "New York")
-seed_venue.user = seed_user
+seed_venue = Venue.new(name: "Venue 3B", description: "Venue 3 description", category: "Dancehall", location: "New York")
+seed_venue.user = seed_user_b
 seed_venue.save
 
-seed_venue = Venue.new(name: "Venue 4", description: "Venue 4 description", category: "Dancehall", location: "New York")
-seed_venue.user = seed_user
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue 5", description: "Venue 5 description", category: "Gym", location: "Las Vegas")
-seed_venue.user = seed_user
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue 6", description: "Venue 6 description", category: "Gym", location: "Las Vegas")
-seed_venue.user = seed_user
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue 7", description: "Venue 7 description", category: "Gym", location: "Las Vegas")
-seed_venue.user = seed_user
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue 8", description: "Venue 8 description", category: "Gym", location: "Buenos Aires")
-seed_venue.user = seed_user
+seed_venue = Venue.new(name: "Venue 4B", description: "Venue 4 description", category: "Dancehall", location: "New York")
+seed_venue.user = seed_user_b
 seed_venue.save
