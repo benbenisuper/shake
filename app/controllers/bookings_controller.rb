@@ -2,10 +2,6 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-  def index
-    @bookings = policy_scope(booking).order(created_at: :desc)
-  end
-
   def new
     @booking = Booking.new
     authorize @booking
@@ -16,10 +12,8 @@ class BookingsController < ApplicationController
     authorize @booking
     @user = current_user
     @booking.user = @user
-    @booking.venue = @venue
-
     if @booking.save
-      redirect_to bookings_path
+      redirect_to edit_booking_path(@booking)
     else
       render :new
     end
@@ -35,11 +29,11 @@ class BookingsController < ApplicationController
     authorize @booking
   end
 
-  def patch
+  def update
     @booking = Booking.find(params[:id])
     authorize @booking
     if @booking.update(booking_params)
-      redirect_to booking_path
+      redirect_to dashboard_path
     else
       render :edit
     end
@@ -55,7 +49,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start, :end)
+    params.require(:booking).permit(:start, :end, :venue_id)
   end
 
 
