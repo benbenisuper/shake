@@ -1,15 +1,51 @@
 <br>
-<h1>Show</h1>
 <br>
-<div class="container">
-<div class="card" style="width: 24rem;">
-  <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title"><%= @venue.name %></h5>
-    <p class="card-text"><%= @venue.description %></p>
-    <a href="#" class="btn btn-primary"><%= @venue.location %><%= @venue.category %></a>
-  </div>
+<div class="container show">
+  <div class="row no-gutters">
+    <div class="col-sm-5 col-md-7">
+      <div class="card">
+        <% if @venue.photo.attached? %>
+        <%= cl_image_tag @venue.photo.key, class:"card-img-top"%>
+        <% else %>
+        <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @venue.name %></h5>
+          <p class="card-text"><%= @venue.description %></p>
+          <a href="#" class="btn btn-primary"><%= @venue.location %><%= @venue.category %></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-1 col-md-1">
+    </div>
+    <div class="col-6 col-md-4">
+      <%= render "venue_show_form" %>
+    </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="col-6 col-md-4">
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe width="950" height="249" id="gmap_canvas" src="https://maps.google.com/maps?q=buenos%20ares&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+        </iframe>
+      </div>
+      <style>.mapouter{position:center;text-align:right;height:249px;width:950px;}.gmap_canvas {overflow:hidden;background:none!important;height:249px;width:950px;}
+    </style>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
 
 
