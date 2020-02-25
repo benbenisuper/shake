@@ -23,11 +23,7 @@
       <% current_user.bookings.each do |booking|%>
 
         <div class="card-dashboard mt-2">
-          <% if booking.venue.photos.attached? %>
-            <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
-          <% else %>
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-          <% end %>
+          <%= cl_image_tag booking.venue.venue_image, class:"card-img-top" %>
           <div class="card-dashboard-infos">
             <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h2>
             <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
@@ -47,11 +43,7 @@
       <% current_user.venues.each do |venue|%>
 
         <div class="card-dashboard mt-2">
-          <% if venue.photos.attached? %>
-            <%= cl_image_tag venue.photos.first.key, class:"card-img-top" %>
-          <% else %>
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-          <% end %>
+          <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
           <div class="card-dashboard-infos">
             <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
             <p><%= venue.description %></p>
