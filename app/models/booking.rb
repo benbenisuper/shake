@@ -3,9 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :venue
   has_one :review
 
-  validates :start_date, presence: true
-  validates :end_date, presence: true
-  validates :comment, presence: true
-  validates :status, presence: true
+  validates :start, presence: true
+  validates :end, presence: true
 
 end
