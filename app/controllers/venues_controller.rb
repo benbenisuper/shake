@@ -29,7 +29,7 @@ end
 private
 
 def venue_params
-  params.require(:venue).permit(:name, :location, :category, :description, :photo)
+  params.require(:venue).permit(:name, :location, :category, :description, :capacity, :photo)
 end
 
 end
