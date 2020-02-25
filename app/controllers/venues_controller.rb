@@ -22,6 +22,7 @@ def index
 end
 
 def show
+  @booking = Booking.new
   @venue = Venue.find(params[:id])
 end
 
