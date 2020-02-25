@@ -4,17 +4,19 @@
 
   <div class="card-columns">
     <% @venues.each do |venue| %>
-    <div class="card shadow-sm mb-5 bg-white rounded">
-        <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
+      <%= link_to venue_path(venue) do %>
+        <div class="card shadow-sm mb-5 bg-white rounded">
+          <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= venue.name %></h5>
+            <p class="card-text"><%= venue.description %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><%= venue.location %> <%= venue.category %></small>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
-          <p class="card-text"><%= venue.description %></p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted"><%= venue.location %> <%= venue.category %></small>
-        </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
 </div>
