@@ -19,7 +19,7 @@
         <div class="form-group ml-lg-2" >
           <label for="inputState" class="mx-2">Type of event</label>
           <select id="inputState" class="form-control" name="Type-of-event">
-            <% Venue::TYPES.each do |type| %>
+            <% Venue::ACTIVITIES.each do |type| %>
               <option><%= type %></option>
             <% end %>
           </select>
