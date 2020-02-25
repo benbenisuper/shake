@@ -2,7 +2,8 @@
   <%= f.input :name %>
   <%= f.input :location %>
   <%= f.input :category %>
-  <%= f.input :capacity %>
+  <%= f.input :capacity, as: :numeric %>
+  <%= f.input :price, as: :numeric %>
   <%= f.input :description %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.submit "Submit", class: "btn btn-secondary" %>
