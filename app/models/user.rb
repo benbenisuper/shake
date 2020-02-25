@@ -8,4 +8,13 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :venues
 
+  has_one_attached :avatar
+
+  def user_avatar
+    if self.avatar.attached?
+      self.avatar.key
+    else
+      "avatar"
+    end
+  end
 end
