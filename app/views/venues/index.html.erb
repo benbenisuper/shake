@@ -4,23 +4,18 @@
 <div class="container">
   <div class="card-columns">
     <% @venues.each do |venue| %>
-    <div class="card">
-      <% if venue.photos.attached? %>
-      <%= cl_image_tag venue.photos.first.key, class:"card-img-top"%>
-      <% else %>
-      <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
-      <% end %>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
-        <p class="card-text"><%= venue.description %></p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted"><%= venue.location %><%= venue.category %></small>
-      </div>
+    <div class="card shadow-sm mb-5 bg-white rounded">
+        <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+          <p class="card-text"><%= venue.description %></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted"><%= venue.location %> <%= venue.category %></small>
+        </div>
     </div>
     <% end %>
   </div>
 </div>
-
-
 
