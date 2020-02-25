@@ -29,8 +29,8 @@ def index
 end
 
 def show
-  @booking = Booking.new
   @venue = Venue.find(params[:id])
+  @booking = @venue.bookings.build
 
   authorize @venue
 end
