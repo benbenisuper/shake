@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-morgan = User.create(email: "morgan@shake.com", password: "testtest")
-ben = User.create(email: "ben@shake.com", password: "testtest")
-jose = User.create(email: "jose@shake.com", password: "testtest")
-manuel = User.create(email: "manuel@shake.com", password: "testtest")
+morgan = User.create(email: "morgan@shake.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000")
+ben = User.create(email: "ben@shake.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000")
+jose = User.create(email: "jose@shake.com", password: "testtest", first_name: "Jose", last_name: "X", phone:"0000")
+manuel = User.create(email: "manuel@shake.com", password: "testtest", first_name: "Manuel", last_name: "X", phone:"0000")
 
 
 seed_venue = Venue.new(name: "Venue Jose A", description: "Venue 1 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
