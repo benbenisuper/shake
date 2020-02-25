@@ -2,8 +2,8 @@
 <br>
 <div class="container show">
   <div class="row no-gutters">
-    <div class="col-sm-5 col-md-7">
-      <div class="card">
+    <div class="col-sm-5 col-md-7 ">
+      <div class="card shadow-sm p-3 mb-5 bg-white rounded">
         <% if @venue.photo.attached? %>
         <%= cl_image_tag @venue.photo.key, class:"card-img-top"%>
         <% else %>
@@ -18,8 +18,9 @@
     </div>
     <div class="col-1 col-md-1">
     </div>
-    <div class="col-6 col-md-4">
-      <%= render "venue_show_form" %>
+    <div class="col-6 col-md-4 shadow p-3 mb-5 bg-white rounded h-50 d-inline-block">
+      <h3><%= @venue.name %></h3>
+      <%= render "bookings/booking_form" %>
     </div>
   </div>
 </div>
