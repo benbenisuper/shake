@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
 morgan = User.create(email: "morgan@shake.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000")
 ben = User.create(email: "ben@shake.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000")
@@ -12,40 +13,11 @@ jose = User.create(email: "jose@shake.com", password: "testtest", first_name: "J
 manuel = User.create(email: "manuel@shake.com", password: "testtest", first_name: "Manuel", last_name: "X", phone:"0000")
 
 
-seed_venue = Venue.new(name: "Venue Jose A", description: "Venue 1 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
+
+
+10.times do
+seed_venue = Venue.new(name: Faker::Name.name , description: Faker::Lorem.paragraphs, price: Faker::Number.number(digits: 5), activity: "Wedding", capacity: Faker::Number.number(digits: 2), category: "Private House", location: Faker::Address.full_address)
 seed_venue.user = jose
 seed_venue.save
+end
 
-seed_venue = Venue.new(name: "Venue Jose B", description: "Venue 2 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = jose
-seed_venue.save
-
-
-
-seed_venue = Venue.new(name: "Venue Morgan A", description: "Venue 3 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = morgan
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue Morgan B", description: "Venue 4 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = morgan
-seed_venue.save
-
-
-
-seed_venue = Venue.new(name: "Venue Ben A", description: "Venue 5 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = ben
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue Ben B", description: "Venue 6 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = ben
-seed_venue.save
-
-
-
-seed_venue = Venue.new(name: "Venue Manuel A", description: "Venue 7 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = manuel
-seed_venue.save
-
-seed_venue = Venue.new(name: "Venue Manuel B", description: "Venue 8 description", price: 100, activity: "Wedding", capacity: "10", category: "Private House", location: "Buenos Aires")
-seed_venue.user = manuel
-seed_venue.save
