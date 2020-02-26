@@ -1,7 +1,7 @@
   <div class="form-wrapper" style="margin: 0 auto;">
     <%= simple_form_for [@booking] do |f| %>
-    <%= f.input :start, as: :date, required: false, input_html: {id:"start", class: "datepicker"} %>
-    <%= f.input :end, as: :date, required: false, input_html: {id:"end", class: "datepicker"} %>
+    <%= f.input :start, as: :string, required: false, input_html: {id:"start", class: "datepicker"} %>
+    <%= f.input :end, as: :string, required: false, input_html: {id:"end", class: "datepicker"} %>
     <%= f.input :venue_id, :as => :hidden, :input_html => { value: @booking.venue.id } %>
     <%= f.submit "Submit", class: "btn btn-secondary" %>
     <% end %>

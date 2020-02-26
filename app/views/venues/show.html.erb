@@ -1,34 +1,35 @@
-<div class="container">
-  <%= render "venue_slides" %>
-</div>
-
-<br>
-<br>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-6 col-md-7 ">
-      <%= render "venues_map" %>
-    </div>
-    <div class="col-6 col-md-4 shadow p-3 mb-5 bg-white">
-      <h3><%= @venue.name %></h3>
-      <%= render "bookings/booking_form" %>
-    </div>
+    <%= render "venue_slides" %>
   </div>
 </div>
+<br>
+<div class="container-fluid">
+<h1><%= @venue.name %></h1>
+<h2><%= @venue.location %></h2>
+</div>
+</%>
+<br>
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col mx-3 shadow p-3 mb-5 bg-lightgrey rounded">
+      <%= render "venues_map" %>
+    </div>
 
+    <div class="col mx-0 shadow p-3 mb-5 bg-lightgrey rounded" >
+      <h4>Reserve</h4>
+      <%= render "bookings/booking_form" %>
+    </div>
+    <div class="col mx-3 shadow p-3 mb-5 bg-lightgrey rounded">
+      <%= @venue.description %>
+      <br>
+      <br>
+      <%= @venue.capacity %> <i class="fas fa-users"></i> <i class="fas fa-wifi"></i> <i class="fas fa-car"></i>
+    </div>
+
+  </div>
+</div>
 <br>
 <br>
 <br>
-<br>
-
-
-
-
-
-
-
-
-
-
-
 

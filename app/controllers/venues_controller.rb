@@ -30,8 +30,25 @@ def index
   @category = params["Category"]
   @activity = params["Type-of-event"]
 
-  @venues = policy_scope(Venue).order(created_at: :desc).where(["location = ? and category = ? and activity = ?", @location, @category, @activity])
-  # @venues = policy_scope(Venue).order(created_at: :desc).where(location: @location and category: @category and type: @type)
+  item = Venue.arel_table
+
+  if @location == "City"
+    @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+  else
+    @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+
+    @venues = @venues.where(["location like ?", "%#{@location}%"])
+  end
+
+
+  @venues_geocoded= @venues.geocoded #returns flats with coordinates
+
+    @markers = @venues_geocoded.map do |venue|
+      {
+        lat: venue.latitude,
+        lng: venue.longitude
+      }
+    end
 end
 
 def show
@@ -58,7 +75,7 @@ end
 
 def update
   @venue = Venue.find(params[:id])
-  authorize @venues
+  authorize @venue
 
   @venue.update(venue_params)
 
