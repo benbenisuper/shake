@@ -26,9 +26,11 @@ class VenuesController < ApplicationController
 
   def index
     @location = params["location"]
+
     @location = "City" if @location == "" || @location == nil
     @category = params["Category"]
     @activity = params["Type-of-event"]
+
 
     item = Venue.arel_table
 
