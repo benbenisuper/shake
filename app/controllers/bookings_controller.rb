@@ -24,11 +24,13 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     authorize @booking
+    @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
   end
 
   def edit
     @booking = Booking.find(params[:id])
     authorize @booking
+    @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
   end
 
   def update
@@ -46,7 +48,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.destroy
-    redirect_to bookings_path
+    redirect_to dashboard_path
   end
 
   private
