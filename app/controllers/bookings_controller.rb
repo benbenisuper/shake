@@ -25,6 +25,12 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
+    @markers = [
+      {
+        lat: @booking.venue.latitude,
+        lng: @booking.venue.longitude
+      }
+    ]
   end
 
   def edit
