@@ -3,7 +3,7 @@ class Venue < ApplicationRecord
   ACTIVITIES = ["Wedding", "Dinner", "Work"]
   geocoded_by :location
   belongs_to :user
-  has_many :bookings
+  has_many :bookings, dependent: :nullify
   has_many_attached :photos
 
   validates :name, presence: :true
