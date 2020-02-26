@@ -11,7 +11,9 @@
   <% end %>
   <!-- <p class='text-left'>Status:  <strong><%= @status_message %></strong></p> -->
   <div class="d-flex justify-content-between">
+    <%= link_to booking_path(@booking), method: :delete, class: 'btn btn-warning mr-1' do %>
+          Cancel
+        <% end %>
     <%= f.submit "Confirm", class:"btn btn-primary" %>
-    <%= link_to "cancel", @booking.venue.nil? ? dashboard_path : venue_path(@booking.venue.id), class:"btn btn-danger"%>
   </div>
 <% end %>
