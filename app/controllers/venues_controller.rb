@@ -91,7 +91,7 @@ def show
 
 end
 
-def delete
+def destroy
   @venue = Venue.find(params[:id])
 
   authorize @venue
