@@ -5,7 +5,7 @@
     <form class="form-inline d-block bg-white d-lg-flex justify-content-lg-between search-bar"
     action="/venues" method="get">
       <div class="form-group flex-grow-1">
-        <input type="text" class="form-control w-100" placeholder="Type the location" name="location">
+        <input type="text" class="form-control w-100" placeholder="City" name="location" id="city">
       </div>
       <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
         <div class="form-group ml-lg-2">
@@ -17,7 +17,7 @@
           </select>
         </div>
         <div class="form-group ml-lg-2" >
-          <label for="inputState" class="mx-2">Type of event</label>
+          <label for="inputState" class="mx-2">Activity</label>
           <select id="inputState" class="form-control" name="Type-of-event">
             <% Venue::ACTIVITIES.each do |type| %>
               <option><%= type %></option>
