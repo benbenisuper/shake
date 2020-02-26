@@ -15,9 +15,9 @@ manuel = User.create(email: "manuel@shake.com", password: "testtest", first_name
 
 
 
-10.times do
-seed_venue = Venue.new(name: Faker::Name.name , description: Faker::Lorem.paragraphs, price: Faker::Number.number(digits: 5), activity: "Wedding", capacity: Faker::Number.number(digits: 2), category: "Private House", location: Faker::Address.full_address)
-seed_venue.user = jose
-seed_venue.save
-end
+# 10.times do
+# seed_venue = Venue.new(name: Faker::Name.name , description: Faker::Lorem.paragraph, price: Faker::Number.number(digits: 5), activity: "Wedding", capacity: Faker::Number.number(digits: 2), category: "Private House", location: Faker::Address.full_address)
+# seed_venue.user = jose
+# seed_venue.save
+# end
 
