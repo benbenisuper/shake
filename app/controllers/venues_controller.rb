@@ -3,35 +3,50 @@ class VenuesController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-def new
-  @venue = Venue.new
+  def new
+    @venue = Venue.new
 
-  authorize @venue
-end
-
-def create
-  @venue = Venue.new(venue_params)
-
-  authorize @venue
-
-  @user = current_user
-  @venue.user = @user
-
-  if @venue.save
-    redirect_to dashboard_path
-  else
-    render :new
+    authorize @venue
   end
-end
 
-def index
-  @location = params["location"]
-  @location = "City" if @location == "" || @location == nil
-  @category = params["Category"]
-  @activity = params["Type-of-event"]
+  def create
+    @venue = Venue.new(venue_params)
 
-  @venues = policy_scope(Venue).order(created_at: :desc).where(["location = ? and category = ? and activity = ?", @location, @category, @activity])
-  # @venues = policy_scope(Venue).order(created_at: :desc).where(location: @location and category: @category and type: @type)
+    authorize @venue
+
+    @user = current_user
+    @venue.user = @user
+
+    if @venue.save
+      redirect_to dashboard_path
+    else
+      render :new
+    end
+  end
+
+  def index
+    @location = params["location"]
+    @location = "City" if @location == "" || @location == nil
+    @category = params["Category"]
+    @activity = params["Type-of-event"]
+
+    if @location == "City"
+      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+    else
+      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+
+      @venues = @venues.where(["location like ?", "%#{@location}%"])
+    end
+
+
+  @venues_geocoded= @venues.geocoded #returns flats with coordinates
+
+  @markers = @venues_geocoded.map do |venue|
+    {
+      lat: venue.latitude,
+      lng: venue.longitude
+    }
+  end
 end
 
 def show
@@ -39,6 +54,14 @@ def show
   @booking = @venue.bookings.build
 
   authorize @venue
+
+  @markers = [
+    {
+      lat: @venue.latitude,
+      lng: @venue.longitude
+    }
+  ]
+
 end
 
 def destroy
@@ -58,7 +81,7 @@ end
 
 def update
   @venue = Venue.find(params[:id])
-  authorize @venues
+  authorize @venue
 
   @venue.update(venue_params)
 

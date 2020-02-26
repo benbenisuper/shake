@@ -1,7 +1,7 @@
 class Venue < ApplicationRecord
   CATEGORIES = ["Private House", "Outdoor", "Castle"]
   ACTIVITIES = ["Wedding", "Dinner", "Work"]
-
+  geocoded_by :location
   belongs_to :user
   has_many :bookings, dependent: :nullify
   has_many_attached :photos
@@ -14,7 +14,9 @@ class Venue < ApplicationRecord
   validates :capacity, presence: :true
   validates :price, presence: :true, numericality: { only_integer: true }
 
- def venue_image
+  after_validation :geocode, if: :will_save_change_to_location?
+
+  def venue_image
     if self.photos.attached?
       self.photos.first.key
     else

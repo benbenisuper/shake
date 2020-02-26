@@ -1,6 +1,6 @@
 <%= simple_form_for [@venue] do |f| %>
   <%= f.input :name %>
-  <%= f.input :location %>
+  <%= f.input :location, input_html: { id: 'location' }  %>
   <%= f.input :category, collection: Venue::CATEGORIES %>
   <%= f.input :activity, collection: Venue::ACTIVITIES %>
   <%= f.input :capacity, as: :numeric %>

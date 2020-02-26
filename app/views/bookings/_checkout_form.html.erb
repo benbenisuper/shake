@@ -10,5 +10,8 @@
     <p class='text-left'>Total price:  <strong><%= @booking.venue.price * (@booking.end - @booking.start).to_i %> $US</strong></p>
   <% end %>
   <!-- <p class='text-left'>Status:  <strong><%= @status_message %></strong></p> -->
-  <%= f.submit "Confirm", class: "btn btn-secondary" %>
+  <div class="d-flex justify-content-between">
+    <%= f.submit "Confirm", class:"btn btn-primary" %>
+    <%= link_to "cancel", @booking.venue.nil? ? dashboard_path : venue_path(@booking.venue.id), class:"btn btn-danger"%>
+  </div>
 <% end %>

@@ -1,20 +1,37 @@
-
-<div class="container d-flex justify-content-center">
-  <div class="">.
-    <h1 class='text-center mt-4 mb-4'>Booking Confirmation</h1>
-    <% if @booking.venue.nil? %>
-    <h3>Venue: <strong>This venue is no longer available.</strong></h3>
-    <% else %>
-    <h3>Venue: <strong><%= @booking.venue.name %></strong></h3>
-    <% end %>
-    <h3>Start Date and Time: <strong><%= @booking.start %></strong></h3>
-    <h3>End Date and Time: <strong><%= @booking.end %></strong></h3>
-    <% if @booking.venue.nil? %>
-    <h3>Price per hour: <strong>Price no longer available.</strong></h3>
-    <% else %>
-    <h3>Price per hour: <strong><%= @booking.venue.price %> $US</strong></h3>
-    <% end %>
-    <h3>Total price: <strong><%= @booking.price %> $US</strong></h3>
-    <h3 class='text-left'>Status:  <strong><%= @status_message %></strong></h3>
+<div class="container d-flex justify-content-center mt-5 ">
+  <div class="shadow-sm p-5 bg-white rounded">
+    <h1 class='text-center mb-3'>Booking Confirmation</h1>
+    <br>
+    <div class="d-flex justify-content-between mb-3 mt-3">
+      <h3 class="text-left">Venue:</h3>
+      <% if @booking.venue.nil? %>
+        <h3>Venue: <strong>This venue is no longer available.</strong></h3>
+      <% else %>
+        <h3><strong><%= @booking.venue.name %></strong></h3>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+      <h3>Start Date and Time:</h3>
+      <h3><strong><%= @booking.start %></strong></h3>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+      <h3 class="text-left">End Date and Time:</h3>
+      <h3><strong><%= @booking.end %></strong></h3>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+      <h3>Price per hour:</h3>
+      <% if @booking.venue.nil? %>
+        <h3>Price per hour: <strong>Price no longer available.</strong></h3>
+      <% else %>
+        <h3><strong><%= @booking.venue.price %>$US</strong></h3>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+      <h3>Total price:</h3>
+      <h3><strong><%= @booking.price %>$US</strong></h3>
+    </div>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to "Go to your dashboard",dashboard_path, class:"btn btn-primary" %>
+    </div>
   </div>
 </div>

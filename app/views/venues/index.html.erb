@@ -1,4 +1,14 @@
+  <div
+    id="map"
+    style="width: 100%;
+    height: 300px;"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
+
 <div class="container">
+
+
   <h1 class="mt-4">Venues</h1>
   <%= render "shared/filter" %>
 
@@ -8,16 +18,22 @@
         <div class="card shadow-sm mb-5 bg-white rounded">
           <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
           </div>
-          <div class="card-body">
+          <div class="card-body" style="height: 200px; overflow: hidden">
             <h5 class="card-title"><%= venue.name %></h5>
             <p class="card-text"><%= venue.description %></p>
           </div>
-          <div class="card-footer">
+          <div class="card-footer" style="height: 100px; overflow: hidden">
             <small class="text-muted"> <%= venue.category %> <%= venue.location %>  <i class="fas fa-map-marker-alt"></i></small>
           </div>
         </div>
       <% end %>
     <% end %>
   </div>
+
+    <% if @venues == [] %>
+      <h3>We are sorry, we have nothing to show, yet</h3>
+      <p>Check out another city / category / activity!</p>
+    <% end %>
+
 </div>
 
