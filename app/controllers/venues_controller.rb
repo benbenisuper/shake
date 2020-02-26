@@ -31,9 +31,6 @@ class VenuesController < ApplicationController
     @category = params["Category"]
     @activity = params["Type-of-event"]
 
-
-    item = Venue.arel_table
-
     if @location == "City"
       @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
     else
@@ -59,37 +56,12 @@ def show
 
   authorize @venue
 
-
-    item = Venue.arel_table
-
-    if @location == "City"
-      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
-    else
-      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
-
-      @venues = @venues.where(["location like ?", "%#{@location}%"])
-    end
-
-
-  @venues_geocoded= @venues.geocoded #returns flats with coordinates
-
-  @markers = @venues_geocoded.map do |venue|
+  @markers = [
     {
-      lat: venue.latitude,
-      lng: venue.longitude
+      lat: @venue.latitude,
+      lng: @venue.longitude
     }
-  end
-
-
-# @venue_geocoded= @venue.geocoded #returns flats with coordinates
-
-# @markers = @venue_geocoded.map do |venue|
-#   {
-#     lat: venue.latitude,
-#     lng: venue.longitude
-#   }
-# end
-
+  ]
 
 end
 
