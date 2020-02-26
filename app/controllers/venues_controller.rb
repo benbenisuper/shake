@@ -58,7 +58,7 @@ end
 
 def update
   @venue = Venue.find(params[:id])
-  authorize @venues
+  authorize @venue
 
   @venue.update(venue_params)
 
