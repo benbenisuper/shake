@@ -1,3 +1,9 @@
+<div class="container">
+  <div class ="row justify-content-center mt-5">
+    <div class="col-12 col-lg-8">
+      <div class="shadow-sm p-1 bg-white rounded">
+
+
   <div class="container my-4" style="display: flex; align-items: center">
     <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle"%>
 
@@ -90,7 +96,7 @@
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
@@ -125,6 +131,7 @@
                   <tr style="color: grey">
                     <th>Rating</th>
                     <th>Guest</th>
+                    <th>Title</th>
                     <th>Comment</th>
                   </tr>
 
@@ -133,6 +140,7 @@
                       <% unless booking.review.nil? %>
                         <td><%= ('<i class="fas fa-star"></i>' * booking.review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - booking.review.rating)).html_safe %></td>
                         <td><%= booking.review.user.first_name %></td>
+                        <td><%= booking.review.title %></td>
                         <td><%= booking.review.comment %></td>
                       <% end %>
                     </tr>
@@ -160,3 +168,7 @@
 </div>
 
 
+</div>
+</div>
+</div>
+</div>
