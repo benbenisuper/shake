@@ -32,10 +32,10 @@
       <div class="col shadow p-3 mt-3 bg-white rounded">
         <h4 class="border-bottom">Reviews</h4>
 
-        <% if @reviews.empty? %>
+        <% if @venue.reviews.empty? %>
           There are no ratings for this venue, yet
         <% else %>
-          <% @reviews.each do |review| %>
+          <% @venue.reviews.each do |review| %>
             <% unless review.nil? %>
               <div class="review_card">
                 <h4 class=""><%= ('<i class="fas fa-star"></i>' * review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - review.rating)).html_safe %> <%= review.title %> </h4>
