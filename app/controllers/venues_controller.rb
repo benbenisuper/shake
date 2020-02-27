@@ -64,7 +64,6 @@ def show
       lng: @venue.longitude
     }
   ]
-
 end
 
 def destroy
