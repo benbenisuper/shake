@@ -24,6 +24,12 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     authorize @booking
+    if @booking.is_commented?
+      @review = Review.find_by(booking_id: @booking.id.to_i)
+    else
+      @review = Review.new
+    end
+    # @reviews = Review.where(booking_id: @booking.id.to_i)
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
     @markers = [
       {

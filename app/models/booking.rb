@@ -6,4 +6,19 @@ class Booking < ApplicationRecord
   validates :start, presence: true
   validates :end, presence: true
 
+  def is_completed?
+    (Date.today + 3) > self.end
+  end
+
+  def is_commented?
+    !Review.find_by(booking_id: self.id).nil?
+  end
+
+  def can_comment?
+    is_completed? && !is_commented?
+  end
+
+  def show_comment?
+    is_completed? && is_commented?
+  end
 end
