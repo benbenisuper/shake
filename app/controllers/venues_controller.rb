@@ -57,7 +57,11 @@ def show
   @booking = @venue.bookings.build
 
   authorize @venue
-
+  @bookings = Booking.where(venue_id: @venue.id.to_i)
+  @reviews = []
+  @bookings.each do |booking|
+    @reviews << Review.find_by(booking_id: booking.id.to_i)
+  end
   @markers = [
     {
       lat: @venue.latitude,

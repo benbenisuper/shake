@@ -26,45 +26,59 @@
       <div class="shadow mb-3 rounded">
         <%= render "venues/show_map" %>
       </div>
+      <div class="col shadow p-3 mb-4 bg-white rounded sticky-div">
+        <% if @booking.can_comment? %>
+          <h3 class='text-center'>Review</h3>
+          <%= render 'booking_review_form' %>
+        <% elsif @booking.show_comment? %>
+          <h3 class='text-center'>Review</h3>
+          <h2>Title: <%= @review.title %></h2>
+          <p>Rating: <%= @review.rating %></p>
+          <p>Comment: <%= @review.comment %></p>
+        <% else %>
+          <h3 class='text-center text-muted'>Can't Review Yet</h3>
+        <% end %>
+      </div>
 
     </div>
-  <div class="col-xs-12 col-lg-5">
-    <div class="shadow-sm p-5 bg-white rounded sticky-div">
-      <h1 class='text-center mb-3'>Booking Confirmation</h1>
-      <div class="d-flex justify-content-between mb-3 mt-3">
-        <p class="text-left">Venue:</p>
-        <% if @booking.venue.nil? %>
-        <p>Venue: <strong>This venue is no longer available.</strong></p>
-        <% else %>
-        <p><strong><%= @booking.venue.name %></strong></p>
-        <% end %>
-      </div>
-      <div class="d-flex justify-content-between mb-3">
-        <p>Start Date and Time:</p>
-        <p><strong><%= @booking.start %></strong></p>
-      </div>
-      <div class="d-flex justify-content-between mb-3">
-        <p class="text-left">End Date and Time:</p>
-        <p><strong><%= @booking.end %></strong></p>
-      </div>
-      <div class="d-flex justify-content-between mb-3">
-        <p>Price per day:</p>
-        <% if @booking.venue.nil? %>
-        <p>Price per day: <strong>Price no longer available.</strong></p>
-        <% else %>
-        <p><strong><%= @booking.venue.price %>$US</strong></p>
-        <% end %>
-      </div>
-      <div class="d-flex justify-content-between mb-3">
-        <p>Total price:</p>
-        <p><strong><%= @booking.price %>$US</strong></p>
-      </div>
-      <div class="d-flex justify-content-center mb-3">
-        <%= link_to "Go to your dashboard",dashboard_path, class:"btn btn-primary" %>
+
+    <div class="col-xs-12 col-lg-5">
+      <div class="col shadow p-3 bg-white rounded sticky-div">
+        <h1 class='text-center mb-3'>Booking Confirmation</h1>
+        <div class="d-flex justify-content-between mb-3 mt-3">
+          <p class="text-left">Venue:</p>
+          <% if @booking.venue.nil? %>
+          <p>Venue: <strong>This venue is no longer available.</strong></p>
+          <% else %>
+          <p><strong><%= @booking.venue.name %></strong></p>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <p>Start Date and Time:</p>
+          <p><strong><%= @booking.start %></strong></p>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <p class="text-left">End Date and Time:</p>
+          <p><strong><%= @booking.end %></strong></p>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <p>Price per day:</p>
+          <% if @booking.venue.nil? %>
+          <p>Price per day: <strong>Price no longer available.</strong></p>
+          <% else %>
+          <p><strong><%= @booking.venue.price %>$US</strong></p>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <p>Total price:</p>
+          <p><strong><%= @booking.price %>$US</strong></p>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <%= link_to "Go to your dashboard",dashboard_path, class:"btn btn-primary" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <br>
 <br>
