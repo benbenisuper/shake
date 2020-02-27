@@ -1,7 +1,13 @@
-<div class="container">
-  <h1 class="mt-5">Hello <%= current_user.first_name %></h1>
+  <div class="container my-4" style="display: flex; align-items: center">
+    <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle"%>
 
-  <p>Below, you can see your current listing and bookings</p>
+    <div class="ml-2" style="">
+      <h1 class="m-0 p-0">Hello <%= current_user.first_name %>!</h1>
+      <p  class="m-0 p-0">Below, you can see your current listing and bookings</p>
+    </div>
+  </div>
+
+<div class="container">
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
@@ -17,33 +23,34 @@
     <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
 
       <% if current_user.bookings == [] %>
-      <h4 class="mt-4">Looks empty here. Book something!</h4>
+      <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
       <% end %>
 
       <% current_user.bookings.each do |booking|%>
 
-      <div class="card-dashboard mt-2">
-        <!-- IF BOOKING DOESNT HAVE A VENUE ASSIGNED THEN IT WILL USE A PLACEHOLDER IMAGE -->
-        <%= cl_image_tag booking.venue.nil? ? 'placeholder' : booking.venue.venue_image, class:"card-img-top" %>
-        <div class="card-dashboard-infos">
-          <h2 class="card-title">
-            <%= link_to booking_path(booking) do %>
-            <!-- IF BOOKING DOESNT HAVE A VENUE ASSIGNED THEN IT WILL USE A DELETED VENUE MESSAGE AS NAME -->
-            <%= booking.venue.nil? ? "DELETED VENUE" : booking.venue.name %>
-            <% end %>
-          </h2>
-          <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
+        <div class="card-dashboard mt-2">
+
+            <%= cl_image_tag booking.venue.venue_image, class:"card-img-top" %>
+
+            <div class="card-dashboard-infos">
+              <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h2>
+              <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
+            </div>
+
+            <div class="buttons">
+              <%= link_to edit_booking_path(booking), class: 'btn' do %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              <%= link_to booking_path(booking), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn' do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            </div>
+
         </div>
-        <div class="crud ml-auto mt-auto mr-2 mb-2">
-          <%= link_to edit_booking_path(booking), class: 'btn btn-primary mr-2' do %>
-          Edit
-          <% end %>
-          <%= link_to booking_path(booking), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-warning mr-1' do %>
-          Delete
-          <% end %>
-        </div>
-      </div>
+
       <% end %>
+
+      <%= link_to "Book new venue", root_path, class:"btn mt-2", style:"width: 100%" %>
 
     </div>
 
@@ -51,29 +58,88 @@
     <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
 
       <% if current_user.venues == [] %>
-      <h4 class="mt-4">Looks empty here. Book something!</h4>
+      <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
       <% end %>
 
       <% current_user.venues.each do |venue|%>
 
-      <div class="card-dashboard mt-2">
-        <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
-        <div class="card-dashboard-infos">
-          <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
-          <p><%= venue.description %></p>
+        <div class="card-dashboard mt-2">
+
+            <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
+
+            <div class="card-dashboard-infos">
+              <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
+              <p><%= venue.description %></p>
+            </div>
+
+            <div class="buttons">
+              <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                <i class="fas fa-info"></i>
+              </button>
+
+              <%= link_to edit_venue_path(venue), class: 'btn' do %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              <%= link_to venue_path(venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn' do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+
+            </div>
+
         </div>
-        <div class="crud ml-auto mt-auto mr-2 mb-2">
-          <%= link_to edit_venue_path(venue), class: 'btn btn-primary mr-2' do %>
-            Edit
-          <% end %>
-          <%= link_to venue_path(venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-warning mr-1' do %>
-            Delete
-          <% end %>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h5 class="">Booking Overview</h5>
+
+                 <table style="width:100%">
+                  <tr style="color: grey">
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                  </tr>
+
+                  <% venue.bookings.each do |booking| %>
+                    <tr>
+                      <td><%= booking.start.to_formatted_s(:short) %></td>
+                      <td><%= booking.end.to_formatted_s(:short) %></td>
+                      <td><%= booking.price %>$</td>
+                      <td><%= booking.status_nice %></td>
+                    </tr>
+                  <% end %>
+                </table>
+
+                <h5 class="mt-4">Ratings</h5>
+                  <p> No ratings for this space, yet </p>
+
+                <h5 class="mt-4"></h5>
+                  <%= link_to edit_venue_path(venue), class: 'btn btn-primary' do %>
+                    Edit Venue
+                  <% end %>
+                  <%= link_to venue_path(venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-primary' do %>
+                    Delete Venue
+                  <% end %>
+
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       <% end %>
+
+      <%= link_to "Add new venue", new_venue_path, class:"btn mt-2", style:"width: 100%" %>
 
     </div>
   </div>
 </div>
+
 
