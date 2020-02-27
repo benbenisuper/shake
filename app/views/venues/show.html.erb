@@ -16,32 +16,35 @@
       </div>
 
       <div class="col shadow p-3 bg-white rounded">
-        <h4>Venue Details</h4>
+        <h4 class="border-bottom">Venue Details</h4>
 
-        <h5 class="mt-4 border-top">Description</h5>
+        <h5 class="mt-4">Description</h5>
         <%= @venue.description %>
 
-        <h5 class="mt-4 border-top">Additional information</h5>
+        <h5 class="mt-4">Additional information</h5>
         <strong>Capactiy: </strong><%= @venue.capacity %><br>
         <strong>Internet: </strong><i class="fas fa-wifi"></i><br>
         <strong>Parking: </strong><i class="fas fa-car"></i><br>
         <strong>Other: </strong><i class="fas fa-users"></i>
       </div>
-      <% if @reviews.empty? %>
-      <% else %>
+
+
       <div class="col shadow p-3 mt-3 bg-white rounded">
-        <h3 class='text-center'>Reviews</h3>
-        <% @reviews.each do |review| %>
-          <% unless review.nil? %>
-        <div class="review_card p-3 mt-3 border rounded">
-          <h2 class='border-bottom'>Title: <%= review.title %></h2>
-          <p>Rating: <%= review.rating %></p>
-          <p>Comment: <%= review.comment %></p>
-        </div>
-          <% end %>
+        <h4 class="border-bottom">Reviews</h4>
+
+        <% if @reviews.empty? %>
+          There are no ratings for this venue, yet
+        <% else %>
+          <% @reviews.each do |review| %>
+            <% unless review.nil? %>
+              <div class="review_card">
+                <h4 class=""><%= ('<i class="fas fa-star"></i>' * review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - review.rating)).html_safe %> <%= review.title %> </h4>
+                <p><%= review.comment %></p>
+              </div>
+            <% end %>
+          <% end  %>
         <% end %>
       </div>
-      <% end %>
     </div>
 
     <div class="shadow p-3 ml-3 bg-white rounded" >

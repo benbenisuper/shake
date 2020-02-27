@@ -18,8 +18,13 @@
           <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
           </div>
           <div class="card-body" style="height: 200px; overflow: hidden">
+            <div style="color: white; position: absolute; top: 10px; left: 10px;">
+              <i class="fas fa-star mr-1"></i>
+              <%= venue.average_rating %>
+            </div>
+
             <h5 class="card-title"><%= venue.name %></h5>
-            <p class="card-text"><%= venue.description %></p>
+            <p class="card-text" style="color: black;"><%= venue.description %></p>
           </div>
           <div class="card-footer" style="height: 100px; overflow: hidden">
             <small class="text-muted"> <%= venue.category %> <%= venue.location %>  <i class="fas fa-map-marker-alt"></i></small>
