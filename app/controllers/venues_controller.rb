@@ -31,15 +31,17 @@ class VenuesController < ApplicationController
     @category = params["Category"]
     @activity = params["Type-of-event"]
 
-    if @location == "City"
-      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+    if params[:location] == nil && params[:category] == nil && params[:activity] == nil
+      @venues = policy_scope(Venue).order(created_at: :desc)
     else
-      @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+      if @location == "City"
+        @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
+      else
+        @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
 
-      @venues = @venues.where(["location like ?", "%#{@location}%"])
+        @venues = @venues.where(["location like ?", "%#{@location}%"])
+      end
     end
-
-
   @venues_geocoded= @venues.geocoded #returns flats with coordinates
 
   @markers = @venues_geocoded.map do |venue|

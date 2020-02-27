@@ -14,3 +14,10 @@
 
 @import "components/footer";
 @import "pages/venues";
+
+body {
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("https://images.unsplash.com/photo-1506126944674-00c6c192e0a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}

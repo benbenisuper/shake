@@ -13,7 +13,9 @@ class BookingsController < ApplicationController
     @booking.status = 1
     @user = current_user
     @booking.user = @user
+    if @booking.price.nil?
     @booking.price = @booking.venue.price * (@booking.end - @booking.start).to_i
+    end
     if @booking.save
       redirect_to edit_booking_path(@booking)
     else

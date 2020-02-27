@@ -21,4 +21,11 @@ class Booking < ApplicationRecord
   def show_comment?
     is_completed? && is_commented?
   end
+
+  def status_nice
+    return "Payment pending" if self.status == "1"
+    return "Confirmed" if self.status == "2"
+    return "Finished" if self.status == "3"
+    return "PROBLEM"
+  end
 end

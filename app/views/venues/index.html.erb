@@ -6,11 +6,10 @@
     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
   ></div>
 
-<div class="container">
-
-
-  <h1 class="mt-4">Venues</h1>
   <%= render "shared/filter" %>
+
+<div class="container mt-4">
+
 
   <div class="card-columns">
     <% @venues.each do |venue| %>
@@ -31,7 +30,7 @@
   </div>
 
     <% if @venues == [] %>
-      <h3>Ajust your filter to get started</h3>
+      <h3>Sorry! We couldn't find a venue matching your criteria</h3>
       <p>Check out another city / category / activity!</p>
     <% end %>
 
