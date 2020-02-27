@@ -28,7 +28,11 @@ class Venue < ApplicationRecord
     else
       sum.fdiv(self.reviews.length)
     end
+  end
 
+  def unavailable_dates
+    bookings.pluck(:start, :end).map do |range|
+      { from: range[0], to: range[1] }
   end
 
   def venue_image
