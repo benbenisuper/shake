@@ -4,6 +4,7 @@ class Venue < ApplicationRecord
   geocoded_by :location
   belongs_to :user
   has_many :bookings, dependent: :nullify
+  has_many :reviews, through: :bookings
   has_many_attached :photos
 
   validates :name, presence: :true
@@ -16,11 +17,22 @@ class Venue < ApplicationRecord
 
   after_validation :geocode, if: :will_save_change_to_location?
 
+  def average_rating
+    sum = 0
+    self.reviews.each do |review|
+      sum += review.rating
+    end
+
+    if self.reviews.length == 0
+      "None"
+    else
+      sum.fdiv(self.reviews.length)
+    end
+  end
 
   def unavailable_dates
     bookings.pluck(:start, :end).map do |range|
       { from: range[0], to: range[1] }
-    end
   end
 
   def venue_image
