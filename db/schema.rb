@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(version: 2020_02_27_135822) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "capacity"
+    t.string "activity"
     t.integer "price", default: 1, null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "activity"
     t.index ["user_id"], name: "index_venues_on_user_id"
   end
 
