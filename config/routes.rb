@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :venues
   resources :bookings do
-    resources :reviews
+    resources :reviews, only: %i[new create]
   end
 
   resources :membership
