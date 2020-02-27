@@ -119,8 +119,25 @@
                   <% end %>
                 </table>
 
-                <h5 class="mt-4">Ratings</h5>
-                  <p> No ratings for this space, yet </p>
+                <h5 class="mt-4">Reviews</h5>
+
+                <table style="width:100%">
+                  <tr style="color: grey">
+                    <th>Rating</th>
+                    <th>Guest</th>
+                    <th>Comment</th>
+                  </tr>
+
+                  <% venue.bookings.each do |booking| %>
+                    <tr>
+                      <% unless booking.review.nil? %>
+                        <td><%= ('<i class="fas fa-star"></i>' * booking.review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - booking.review.rating)).html_safe %></td>
+                        <td><%= booking.review.user.first_name %></td>
+                        <td><%= booking.review.comment %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </table>
 
                 <h5 class="mt-4"></h5>
                   <%= link_to edit_venue_path(venue), class: 'btn btn-primary' do %>
