@@ -19,6 +19,7 @@ class Venue < ApplicationRecord
 
   def average_rating
     sum = 0
+
     self.reviews.each do |review|
       sum += review.rating
     end
@@ -33,6 +34,7 @@ class Venue < ApplicationRecord
   def unavailable_dates
     bookings.pluck(:start, :end).map do |range|
       { from: range[0], to: range[1] }
+    end
   end
 
   def venue_image
@@ -42,4 +44,5 @@ class Venue < ApplicationRecord
       "defaultEventImage"
     end
   end
+
 end
