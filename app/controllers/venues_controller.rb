@@ -108,4 +108,3 @@ class VenuesController < ApplicationController
   end
 
 end
-
