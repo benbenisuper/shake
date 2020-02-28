@@ -25,7 +25,7 @@ class Venue < ApplicationRecord
     end
 
     if self.reviews.length == 0
-      "None"
+      ""
     else
       sum.fdiv(self.reviews.length)
     end
