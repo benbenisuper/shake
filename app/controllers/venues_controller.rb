@@ -31,7 +31,7 @@ class VenuesController < ApplicationController
     @category = params["Category"]
     @activity = params["Type-of-event"]
 
-    if params[:location] == nil && params[:category] == nil && params[:activity] == nil
+    if (params[:location] == nil || params[:location] == "City") && (params[:category] == nil || params[:category] == "All Categories") && (params[:activity] == nil || params[:activity] == "All Activities")
       @venues = policy_scope(Venue).order(created_at: :desc)
     else
       if @location == "City"
@@ -42,66 +42,67 @@ class VenuesController < ApplicationController
         @venues = @venues.where(["location like ?", "%#{@location}%"])
       end
     end
-  @venues_geocoded= @venues.geocoded #returns flats with coordinates
 
-  @markers = @venues_geocoded.map do |venue|
-    {
-      lat: venue.latitude,
-      lng: venue.longitude
-    }
+    @venues_geocoded= @venues.geocoded #returns flats with coordinates
+
+    @markers = @venues_geocoded.map do |venue|
+      {
+        lat: venue.latitude,
+        lng: venue.longitude
+      }
+    end
   end
-end
 
-def show
-  @venue = Venue.find(params[:id])
-  @booking = @venue.bookings.build
+  def show
+    @venue = Venue.find(params[:id])
+    @booking = @venue.bookings.build
 
-  authorize @venue
-  @bookings = Booking.where(venue_id: @venue.id.to_i)
-  @reviews = []
-  @bookings.each do |booking|
-    @reviews << Review.find_by(booking_id: booking.id.to_i)
+    authorize @venue
+    @bookings = Booking.where(venue_id: @venue.id.to_i)
+    @reviews = []
+    @bookings.each do |booking|
+      @reviews << Review.find_by(booking_id: booking.id.to_i)
+    end
+    @markers = [
+      {
+        lat: @venue.latitude,
+        lng: @venue.longitude
+      }
+    ]
   end
-  @markers = [
-    {
-      lat: @venue.latitude,
-      lng: @venue.longitude
-    }
-  ]
-end
 
-def destroy
-  @venue = Venue.find(params[:id])
+  def destroy
+    @venue = Venue.find(params[:id])
 
-  authorize @venue
+    authorize @venue
 
-  @venue.destroy
-  redirect_to dashboard_path
-end
-
-def edit
-  @venue = Venue.find(params[:id])
-
-  authorize @venue
-end
-
-def update
-  @venue = Venue.find(params[:id])
-  authorize @venue
-
-  @venue.update(venue_params)
-
-  if @venue.save
-    redirect_to venue_path(@venue)
-  else
-    render :new
+    @venue.destroy
+    redirect_to dashboard_path
   end
-end
 
-private
+  def edit
+    @venue = Venue.find(params[:id])
 
-def venue_params
-  params.require(:venue).permit(:name, :location, :category, :description, :capacity, :price, :activity, photos: [])
-end
+    authorize @venue
+  end
+
+  def update
+    @venue = Venue.find(params[:id])
+    authorize @venue
+
+    @venue.update(venue_params)
+
+    if @venue.save
+      redirect_to venue_path(@venue)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def venue_params
+    params.require(:venue).permit(:name, :location, :category, :description, :capacity, :price, :activity, photos: [])
+  end
 
 end
