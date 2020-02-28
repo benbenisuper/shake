@@ -17,6 +17,7 @@ class BookingsController < ApplicationController
     @booking.price = @booking.venue.price * (@booking.end - @booking.start).to_i
     end
     if @booking.save
+      session[:return_to] ||= request.referer
       redirect_to edit_booking_path(@booking)
     else
       render :new
@@ -45,6 +46,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
+
   end
 
   def update
@@ -52,6 +54,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = 2
     if @booking.update(booking_params)
+      session.delete(:return_to)
       redirect_to booking_path(@booking)
     else
       render :edit
@@ -62,7 +65,11 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.destroy
-    redirect_to dashboard_path
+    if session[:return_to].nil?
+      redirect_to dashboard_path
+    else
+      redirect_to session.delete(:return_to)
+    end
   end
 
   private

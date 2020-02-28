@@ -7,7 +7,7 @@
     <p class='text-left'>Total price:  <strong> N/A </strong></p>
   <% else %>
     <p class='text-left'>Price per hour: <strong><%= @booking.venue.price %> $US</strong></p>
-    <p class='text-left'>Total price:  <strong><%= @booking.venue.price * (@booking.end - @booking.start).to_i %> $US</strong></p>
+    <p class='text-left'>Total price:  <strong><%= @booking.venue.price * ((@booking.end - @booking.start).to_i + 1) %> $US</strong></p>
   <% end %>
   <!-- <p class='text-left'>Status:  <strong><%= @status_message %></strong></p> -->
   <div class="d-flex justify-content-between">
