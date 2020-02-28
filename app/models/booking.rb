@@ -22,6 +22,12 @@ class Booking < ApplicationRecord
     is_completed? && is_commented?
   end
 
+  def days
+    number = (self.end - self.start).to_i + 1
+    number == 1 ? text = "#{number} day" : text = "#{number} days"
+    return text
+  end
+
   def status_nice
     return "Payment pending" if self.status == "1"
     return "Confirmed" if self.status == "2"
