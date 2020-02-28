@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
     @user = current_user
     @booking.user = @user
     if @booking.price.nil?
-    @booking.price = @booking.venue.price * (@booking.end - @booking.start).to_i
+    @booking.price = @booking.venue.price * ((@booking.end - @booking.start).to_i + 1)
     end
     if @booking.save
       session[:return_to] ||= request.referer
@@ -27,6 +27,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     authorize @booking
+    @booking.price = @booking.venue.price * ((@booking.end - @booking.start).to_i + 1)
     if @booking.is_commented?
       @review = Review.find_by(booking_id: @booking.id.to_i)
     else
@@ -45,6 +46,7 @@ class BookingsController < ApplicationController
   def edit
     @booking = Booking.find(params[:id])
     authorize @booking
+    @booking.price = @booking.venue.price * ((@booking.end - @booking.start).to_i + 1)
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
 
   end
