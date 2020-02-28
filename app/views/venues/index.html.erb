@@ -8,11 +8,11 @@
 
   <%= render "shared/filter" %>
 
-<div class="container-fluid mt-4">
+<div class="container mt-4">
 
 <div class="row">
   <% @venues.each do |venue| %>
-    <%= link_to venue_path(venue), class: "col-12 col-sm-6 col-lg-4 text-decoration-none" do %>
+    <%= link_to venue_path(venue), class: "col-12 col-sm-4 col-lg-4 text-decoration-none", style: "max-width: 400px" do %>
       <div class="card shadow-sm mb-5 bg-white rounded">
         <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')"></div>
         <div class="card-body" style="height: 200px; overflow: hidden">
