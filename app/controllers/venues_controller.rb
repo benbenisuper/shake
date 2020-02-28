@@ -31,7 +31,7 @@ class VenuesController < ApplicationController
     @category = params["Category"]
     @activity = params["Type-of-event"]
 
-    if (params[:location] == nil || params[:location] == "City") && (params[:category] == nil || params[:category] == "All Categories") && (params[:activity] == nil || params[:activity] == "All Activities")
+    if (@location == "City") && (params[:category] == nil || params[:category] == "All Categories") && (params[:activity] == nil || params[:activity] == "All Activities")
       @venues = policy_scope(Venue).order(created_at: :desc)
     else
       if @location == "City"
