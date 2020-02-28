@@ -32,8 +32,10 @@ class Venue < ApplicationRecord
   end
 
   def unavailable_dates
-    bookings.pluck(:start, :end).map do |range|
-      { from: range[0], to: range[1] }
+
+      bookings.pluck(:start, :end).map do |range|
+        { from: range[0], to: range[1] }
+
     end
   end
 
