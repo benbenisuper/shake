@@ -21,10 +21,10 @@ class VenueDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     capacity: Field::Number,
-    activity: Field::String,
     price: Field::Number,
     latitude: Field::Number.with_options(decimals: 2),
     longitude: Field::Number.with_options(decimals: 2),
+    activity: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -55,10 +55,10 @@ class VenueDashboard < Administrate::BaseDashboard
   created_at
   updated_at
   capacity
-  activity
   price
   latitude
   longitude
+  activity
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -75,10 +75,10 @@ class VenueDashboard < Administrate::BaseDashboard
   category
   description
   capacity
-  activity
   price
   latitude
   longitude
+  activity
   ].freeze
 
   # COLLECTION_FILTERS
