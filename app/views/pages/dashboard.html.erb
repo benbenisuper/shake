@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class ="row justify-content-center mt-5">
     <div class="col-12 col-lg-8">
@@ -116,6 +117,7 @@
                   </tr>
 
                   <% venue.bookings.each do |booking| %>
+                    <% booking.update_status %>
                     <tr>
                       <td><%= booking.start.to_formatted_s(:short) %></td>
                       <td><%= booking.end.to_formatted_s(:short) %></td>
