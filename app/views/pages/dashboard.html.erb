@@ -37,10 +37,10 @@
 
         <div class="card-dashboard mt-2">
 
-            <%= cl_image_tag booking.venue.venue_image, class:"card-img-top" %>
+            <%= cl_image_tag booking.venue&.venue_image, class:"card-img-top" %>
 
             <div class="card-dashboard-infos">
-              <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue.name %><% end %></h2>
+              <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue&.name %><% end %></h2>
               <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
             </div>
 
