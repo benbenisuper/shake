@@ -22,11 +22,6 @@
         <%= link_to "Venues", venues_path, class: "nav-link" %>
       </li>
 
-      <div class="d-flex ml-1">
-        <%= render "shared/user_navbar" %>
-
-      </div>
-
       <% if controller_name == "venues" && action_name == "show" %>
 
       <li class="nav-item">
@@ -42,8 +37,14 @@
         <% end %>
 
       </li>
-
       <% end %>
+
+      <div class="d-flex ml-1">
+        <%= render "shared/user_navbar" %>
+
+      </div>
+
+
 
     </ul>
   </div>
