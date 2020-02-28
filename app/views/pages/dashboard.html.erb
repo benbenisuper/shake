@@ -48,7 +48,7 @@
               <%= link_to edit_booking_path(booking), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
                 <i class="far fa-edit"></i>
               <% end %>
-              <%= link_to booking_path(booking), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover', 'data-content': 'Delete', 'data-placement': 'top'}, method: :delete, data: { confirm: "Are you sure?" } do %>
+              <%= link_to booking_path(booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
                 <i class="far fa-trash-alt"></i>
               <% end %>
             </div>
@@ -84,7 +84,7 @@
               <%= link_to edit_venue_path(venue), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
                 <i class="far fa-edit"></i>
               <% end %>
-              <%= link_to venue_path(venue), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Delete', 'data-placement': 'top' }, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn' do %>
+              <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?" }, class: 'btn' do %>
                 <i class="far fa-trash-alt"></i>
               <% end %>
 
