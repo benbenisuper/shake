@@ -1,9 +1,10 @@
 <div class="container">
+
   <h1 class="mt-3" style="font-weight: 900">Booking Confirmation</h1>
   <p><%= @booking.venue.name %> - <%= @booking.venue.location %></p>
 
-
   <div class="row">
+
     <div class="col-xs-12 col-lg-7">
 
       <div class="">
@@ -12,10 +13,8 @@
 
       <div class="col shadow p-3 bg-white rounded">
         <h4 class="border-bottom">Venue Details</h4>
-
         <h5 class="mt-4">Description</h5>
         <%= @booking.venue.description %>
-
         <h5 class="mt-4">Additional information</h5>
         <strong>Capactiy: </strong><%= @booking.venue.capacity %><br>
         <strong>Internet: </strong><i class="fas fa-wifi"></i><br>
