@@ -1,10 +1,10 @@
 <div class="sticky-top navbar navbar-expand-sm navbar-light navbar-lewagon m-0 p-0 pr-1">
 
   <%= link_to "/", class: "navbar-brand" do %>
-    <div class="d-flex ml-1">
-      <%= cl_image_tag "logo", style:"width: 50px"%>
-      <h2 class="mt-1">Shake</h2>
-    </div>
+  <div class="d-flex ml-1">
+    <%= cl_image_tag "logo", style:"width: 50px"%>
+    <h2 class="mt-1">Shake</h2>
+  </div>
   <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,24 +25,36 @@
 
       <% if controller_name == "venues" && action_name == "show" %>
 
-        <li class="nav-item">
-          <% if policy(@venue).edit? %>
-            <%= link_to "Edit venue", edit_venue_path, class: "nav-link" %>
-          <% end %>
+      <li class="nav-item">
+        <% if policy(@venue).edit? %>
+        <%= link_to "Edit venue", edit_venue_path, class: "nav-link" %>
+        <% end %>
 
-        </li>
+      </li>
 
-        <li>
-          <% if policy(@venue).destroy? %>
-            <%= link_to "Delete venue", venue_path(@venue), method: :delete, class: "nav-link" %>
-          <% end %>
+      <li>
+        <% if policy(@venue).destroy? %>
+        <%= link_to "Delete venue", venue_path(@venue), method: :delete, class: "nav-link" %>
+        <% end %>
 
-        </li>
+      </li>
 
       <% end %>
 
-      <%= render "shared/user_navbar" %>
+
 
     </ul>
   </div>
+
+
+
+
+  <div class="d-flex ml-1">
+    <%= render "shared/user_navbar" %>
+
+  </div>
+
+
+
+
 </div>
