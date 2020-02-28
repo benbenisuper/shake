@@ -8,20 +8,18 @@
 
   <%= render "shared/filter" %>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
 
-  <div class="card-columns">
+  <div class="row">
     <% @venues.each do |venue| %>
-      <%= link_to venue_path(venue) do %>
+      <%= link_to venue_path(venue), class: "col-12 col-sm-6 col-lg-4 text-decoration-none" do %>
         <div class="card shadow-sm mb-5 bg-white rounded">
-          <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')">
-          </div>
+          <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')"></div>
           <div class="card-body" style="height: 200px; overflow: hidden">
-            <div style="color: white; position: absolute; top: 10px; left: 10px;">
-              <i class="fas fa-star mr-1"></i>
-              <%= venue.average_rating %>
-            </div>
-
+          <div style="color: white; position: absolute; top: 10px; left: 10px;">
+            <i class="fas fa-star mr-1"></i>
+            <%= venue.average_rating %>
+          </div>
             <h5 class="card-title"><%= venue.name %></h5>
             <p class="card-text" style="color: black;"><%= venue.description %></p>
           </div>
@@ -31,8 +29,6 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-
     <% if @venues == [] %>
       <h3>Sorry! We couldn't find a venue matching your criteria</h3>
       <p>Check out another city / category / activity!</p>
