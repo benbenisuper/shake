@@ -28,4 +28,9 @@ class Booking < ApplicationRecord
     return "Finished" if self.status == "3"
     return "PROBLEM"
   end
+
+  def update_status
+    self.status = "3" if is_completed?
+    self.save
+  end
 end
