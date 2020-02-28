@@ -69,20 +69,17 @@
       <% end %>
 
       <% current_user.venues.each do |venue|%>
-
         <div class="card-dashboard mt-2">
 
-            <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
-
-            <div class="card-dashboard-infos">
-              <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
-              <p><%= venue.description %></p>
-            </div>
-
-            <div class="buttons">
-              <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                <i class="fas fa-info"></i>
-              </button>
+          <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
+          <div class="card-dashboard-infos">
+            <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
+            <p><%= venue.description %></p>
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal<%= venue.id %>">
+              <i class="fas fa-info"></i>
+            </button>
 
               <%= link_to edit_venue_path(venue), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
                 <i class="far fa-edit"></i>
@@ -95,12 +92,11 @@
 
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal<%= venue.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<%= venue.id %>" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+                <h5 class="modal-title" id="exampleModalLabel<%= venue.id %>"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -161,6 +157,7 @@
             </div>
           </div>
         </div>
+
       <% end %>
 
       <%= link_to "Add new venue", new_venue_path, class:"btn mt-2", style:"width: 100%" %>
